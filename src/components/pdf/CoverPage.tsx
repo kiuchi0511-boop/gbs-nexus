@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   page: {
     fontFamily: 'NotoSansJP',
     fontSize: 10,
+    color: PDF_COLORS.text,
     backgroundColor: PDF_COLORS.white,
     position: 'relative',
   },
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 12,
     marginBottom: 6,
+    color: PDF_COLORS.black,
   },
   titleUnderline: {
     width: 220,
@@ -70,6 +72,7 @@ const styles = StyleSheet.create({
   clientName: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: PDF_COLORS.black,
     borderBottomWidth: 1,
     borderBottomColor: PDF_COLORS.black,
     paddingBottom: 6,
@@ -89,6 +92,7 @@ const styles = StyleSheet.create({
   jobName: {
     fontSize: 14,
     fontWeight: 'bold',
+    color: PDF_COLORS.black,
     borderBottomWidth: 1,
     borderBottomColor: PDF_COLORS.black,
     paddingBottom: 4,
@@ -111,6 +115,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold',
     marginBottom: 3,
+    color: PDF_COLORS.black,
   },
   department: {
     fontSize: 9,

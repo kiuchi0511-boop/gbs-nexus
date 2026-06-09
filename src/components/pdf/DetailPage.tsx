@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   page: {
     fontFamily: 'NotoSansJP',
     fontSize: 8,
+    color: PDF_COLORS.text,
     padding: 40,
     paddingBottom: 60,
     backgroundColor: PDF_COLORS.white,
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 4,
     fontSize: 7,
+    color: PDF_COLORS.black,
   },
   tableRowStripe: {
     backgroundColor: PDF_COLORS.stripe,
@@ -104,6 +106,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     fontSize: 7,
     fontWeight: 'bold',
+    color: PDF_COLORS.black,
     borderBottomWidth: 0.5,
     borderBottomColor: PDF_COLORS.border,
   },
@@ -128,6 +131,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: PDF_COLORS.border,
     fontSize: 8,
+    color: PDF_COLORS.black,
   },
   summaryTotal: {
     flexDirection: 'row',
@@ -135,6 +139,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     fontWeight: 'bold',
     fontSize: 9,
+    color: PDF_COLORS.black,
     backgroundColor: PDF_COLORS.subtotalBg,
     marginTop: 4,
     paddingHorizontal: 4,

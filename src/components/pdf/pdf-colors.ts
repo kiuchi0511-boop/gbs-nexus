@@ -8,5 +8,6 @@ export const PDF_COLORS = {
   totalBox: '#F5F5F5',
   white: '#FFFFFF',
   black: '#000000',
-  gray: '#666666',
+  text: '#000000',
+  gray: '#333333',
 } as const
