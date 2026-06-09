@@ -1,0 +1,39 @@
+# gbs-nexus 開発ルール
+
+## 基本方針
+- コメントは日本語で書くこと
+- TypeScriptの型を必ず定義すること（anyは禁止）
+- Server Actionsを積極的に使うこと（API Routesは最小限）
+- フォームはReact Hook Form + Zodで実装すること
+
+## Supabase
+- クライアントサイド: @/lib/supabase.ts からimport
+- サーバーサイド: @/lib/supabase-server.ts からimport
+- 型定義は @/types/database.ts に集約
+
+## 計算ロジック
+- 金額・利益率の計算はすべて @/lib/calculations.ts に集約
+- 利益率 = (見積金額 - 発注金額) / 見積金額 × 100
+- 金額表示は必ず toLocaleString('ja-JP') を使用
+- 数値計算結果は Math.round() で整数化
+
+## 利益率カラーコード
+- 18%以上 → green（良好）
+- 12%以上18%未満 → yellow（注意）
+- 12%未満 → red（要確認）
+
+## PDF
+- @react-pdf/renderer を使用
+- フォントは Noto Sans JP（/public/fonts/ に配置）
+- A4縦（595pt × 842pt）
+
+## UI
+- shadcn/ui コンポーネントを優先使用
+- Tailwind CSS でスタイリング
+- レスポンシブはPC優先（min-width: 1024px想定）
+
+## 命名規則
+- コンポーネント: PascalCase
+- 関数・変数: camelCase
+- DBカラム: snake_case
+- 定数: UPPER_SNAKE_CASE
