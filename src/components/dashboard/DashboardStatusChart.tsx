@@ -60,7 +60,7 @@ export default function DashboardStatusChart({ data }: Props) {
               <Cell key={entry.status} fill={entry.color} />
             ))}
           </Pie>
-          <Tooltip formatter={(value: number, name: string) => [`${value}件`, name]} />
+          <Tooltip formatter={(value) => [`${value}件`]} />
           <Legend
             verticalAlign="bottom"
             formatter={renderLegendText}
@@ -74,7 +74,7 @@ export default function DashboardStatusChart({ data }: Props) {
           <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
           <XAxis dataKey="label" tick={{ fontSize: 12 }} />
           <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
-          <Tooltip formatter={(value: number) => [`${value}件`, '件数']} />
+          <Tooltip formatter={(value) => [`${value}件`]} />
           <Bar dataKey="count" radius={[4, 4, 0, 0]}>
             {data.map((entry) => (
               <Cell key={entry.status} fill={entry.color} />
