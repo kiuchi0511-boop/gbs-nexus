@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   page: {
     fontFamily: 'NotoSansJP',
     fontSize: 8,
-    color: PDF_COLORS.text,
+    color: '#000000',
     padding: 40,
     paddingBottom: 60,
     backgroundColor: PDF_COLORS.white,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   companyHeader: {
     fontSize: 8,
-    color: PDF_COLORS.gray,
+    color: '#333333',
     marginBottom: 4,
   },
   headerLogo: {
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 12,
     letterSpacing: 2,
-    color: PDF_COLORS.black,
+    color: '#000000',
   },
   metaRow: {
     flexDirection: 'row',
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
     fontSize: 8,
   },
-  metaLabel: { color: PDF_COLORS.gray },
+  metaLabel: { color: '#333333' },
   totalBox: {
     marginVertical: 12,
     padding: 14,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     borderColor: PDF_COLORS.border,
     alignItems: 'center',
   },
-  totalLabel: { fontSize: 9, color: PDF_COLORS.gray, marginBottom: 4 },
+  totalLabel: { fontSize: 9, color: '#333333', marginBottom: 4 },
   totalAmount: { fontSize: 24, fontWeight: 'bold', color: PDF_COLORS.accent },
   table: { marginTop: 8, borderWidth: 1, borderColor: PDF_COLORS.border },
   tableHeader: {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 4,
     fontSize: 7,
-    color: PDF_COLORS.black,
+    color: '#000000',
   },
   tableRowStripe: {
     backgroundColor: PDF_COLORS.stripe,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     fontSize: 7,
     fontWeight: 'bold',
-    color: PDF_COLORS.black,
+    color: '#000000',
     borderBottomWidth: 0.5,
     borderBottomColor: PDF_COLORS.border,
   },
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: PDF_COLORS.border,
     fontSize: 8,
-    color: PDF_COLORS.black,
+    color: '#000000',
   },
   summaryTotal: {
     flexDirection: 'row',
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     fontWeight: 'bold',
     fontSize: 9,
-    color: PDF_COLORS.black,
+    color: '#000000',
     backgroundColor: PDF_COLORS.subtotalBg,
     marginTop: 4,
     paddingHorizontal: 4,
@@ -152,11 +152,11 @@ const styles = StyleSheet.create({
     borderTopColor: PDF_COLORS.border,
     paddingTop: 10,
   },
-  footerTitle: { fontWeight: 'bold', marginBottom: 3, color: PDF_COLORS.black },
+  footerTitle: { fontWeight: 'bold', marginBottom: 3, color: '#000000' },
   issuer: {
     marginTop: 8,
     fontSize: 7,
-    color: PDF_COLORS.gray,
+    color: '#333333',
     lineHeight: 1.5,
   },
 })

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   page: {
     fontFamily: 'NotoSansJP',
     fontSize: 10,
-    color: PDF_COLORS.text,
+    color: '#000000',
     backgroundColor: PDF_COLORS.white,
     position: 'relative',
   },
@@ -54,14 +54,14 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 11,
-    color: PDF_COLORS.gray,
+    color: '#333333',
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     letterSpacing: 12,
     marginBottom: 6,
-    color: PDF_COLORS.black,
+    color: '#000000',
   },
   titleUnderline: {
     width: 220,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   clientName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: PDF_COLORS.black,
+    color: '#000000',
     borderBottomWidth: 1,
     borderBottomColor: PDF_COLORS.black,
     paddingBottom: 6,
@@ -86,13 +86,13 @@ const styles = StyleSheet.create({
   },
   jobLabel: {
     fontSize: 11,
-    color: PDF_COLORS.gray,
+    color: '#333333',
     marginBottom: 4,
   },
   jobName: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: PDF_COLORS.black,
+    color: '#000000',
     borderBottomWidth: 1,
     borderBottomColor: PDF_COLORS.black,
     paddingBottom: 4,
@@ -115,16 +115,16 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold',
     marginBottom: 3,
-    color: PDF_COLORS.black,
+    color: '#000000',
   },
   department: {
     fontSize: 9,
     marginBottom: 6,
-    color: PDF_COLORS.gray,
+    color: '#333333',
   },
   companyDetail: {
     fontSize: 8,
-    color: PDF_COLORS.gray,
+    color: '#333333',
     lineHeight: 1.5,
   },
   logoBlock: {
