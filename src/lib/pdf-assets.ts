@@ -10,3 +10,17 @@ export function getPdfImageUrls() {
     title: getPdfImageUrl('/images/gbs_title.jpeg'),
   }
 }
+
+export async function getImageAsBase64(url: string): Promise<string | null> {
+  try {
+    const response = await fetch(url)
+    if (!response.ok) return null
+
+    const buffer = await response.arrayBuffer()
+    const base64 = Buffer.from(buffer).toString('base64')
+    const contentType = response.headers.get('content-type') || 'image/png'
+    return `data:${contentType};base64,${base64}`
+  } catch {
+    return null
+  }
+}

@@ -13,6 +13,7 @@ import EstimateForm, {
   estimateFormSchema,
   type EstimateFormValues,
 } from '@/components/estimates/EstimateForm'
+import EstimateImagesSection from '@/components/estimates/EstimateImagesSection'
 import EstimateItemsTable from '@/components/estimates/EstimateItemsTable'
 import ProfitSummary from '@/components/estimates/ProfitSummary'
 import { Badge } from '@/components/ui/badge'
@@ -27,7 +28,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
-import type { EstimateStatusLog, EstimateWithItems } from '@/types/database'
+import type { EstimateImage, EstimateStatusLog, EstimateWithItems } from '@/types/database'
 import type { EstimateStatus, FormEstimateItem } from '@/types/estimate'
 import { cn } from '@/lib/utils'
 
@@ -48,9 +49,14 @@ const STATUS_STYLES: Record<EstimateStatus, string> = {
 type Props = {
   initialData: EstimateWithItems
   initialStatusLogs: EstimateStatusLog[]
+  initialImages: EstimateImage[]
 }
 
-export default function EstimateEditForm({ initialData, initialStatusLogs }: Props) {
+export default function EstimateEditForm({
+  initialData,
+  initialStatusLogs,
+  initialImages,
+}: Props) {
   const router = useRouter()
   const { estimate } = initialData
 
@@ -252,6 +258,10 @@ export default function EstimateEditForm({ initialData, initialStatusLogs }: Pro
       )}
 
       <EstimateForm form={form} />
+      <EstimateImagesSection
+        estimateId={estimate.id}
+        initialImages={initialImages}
+      />
       <EstimateItemsTable items={items} onChange={setItems} />
       <ProfitSummary items={items} discount={discount} />
 

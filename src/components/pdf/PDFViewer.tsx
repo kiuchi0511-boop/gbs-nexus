@@ -10,6 +10,7 @@ type Props = {
   estimate: Estimate
   items: EstimateItem[]
   company: CompanySettings
+  layoutImageUrl?: string | null
 }
 
 let fontRegistered = false
@@ -23,7 +24,12 @@ function registerFonts() {
   fontRegistered = true
 }
 
-export default function PDFViewer({ estimate, items, company }: Props) {
+export default function PDFViewer({
+  estimate,
+  items,
+  company,
+  layoutImageUrl = null,
+}: Props) {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
@@ -36,7 +42,14 @@ export default function PDFViewer({ estimate, items, company }: Props) {
   }
 
   const fileName = `見積書_${estimate.estimate_no}.pdf`
-  const document = <EstimatePDF estimate={estimate} items={items} company={company} />
+  const document = (
+    <EstimatePDF
+      estimate={estimate}
+      items={items}
+      company={company}
+      layoutImageUrl={layoutImageUrl}
+    />
+  )
 
   return (
     <div className="space-y-4">

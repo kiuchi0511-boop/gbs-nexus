@@ -48,6 +48,33 @@ export type EstimateListItem = {
   profit_rate: number
 }
 
+export type EstimateImage = {
+  id: string
+  estimate_id: string
+  image_url: string
+  prompt: string | null
+  generation_type: string
+  width_m: number | null
+  length_m: number | null
+  count: number | null
+  pillar_type: number | null
+  color: string | null
+  created_at: string
+}
+
+export type SaveEstimateImageInput = {
+  estimate_id: string
+  /** Supabase Storage 等の公開URL（base64は不可） */
+  imageUrl: string
+  prompt?: string
+  generation_type?: string
+  width_m?: number
+  length_m?: number
+  count?: number
+  pillar_type?: number
+  color?: string
+}
+
 export type EstimateStatusLog = {
   id: string
   estimate_id: string
