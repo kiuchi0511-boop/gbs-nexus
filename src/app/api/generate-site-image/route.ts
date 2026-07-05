@@ -14,51 +14,38 @@ export async function POST(req: NextRequest) {
 
     const formData = await req.formData()
     const imageFile = formData.get('image') as File | null
-    const width = formData.get('width') as string
-    const length = formData.get('length') as string
-    const count = formData.get('count') as string
-    const pillarType = formData.get('pillarType') as string
-    const color = (formData.get('color') as string | null) ?? 'green'
 
     if (!imageFile || imageFile.size === 0) {
       return NextResponse.json({ error: '画像ファイルが必要です' }, { status: 400 })
     }
 
-    void pillarType
-
     const arrayBuffer = await imageFile.arrayBuffer()
     const base64 = Buffer.from(arrayBuffer).toString('base64')
 
-    const colorDesc =
-      color === 'orange'
-        ? 'オレンジ色の蛇腹式メッシュキャンバス、アコーディオン状の折り目が均等に並ぶ'
-        : 'グリーン系の半透明メッシュ生地、スカラップ状のたわみで波打つ可動式オーニング幕'
-
-    const frameColor = color === 'orange' ? '白色' : 'アイボリー（薄いベージュ）色'
-
     const prompt = `
-施工後イメージの合成：この屋外施設の写真に、
-以下の仕様のシェード構造物を追加してください。
+施工後イメージの合成をしてください。
 
-【追加するシェードの仕様】
-- フレーム：${frameColor}のスチール角型ポール（直線的、垂直の柱4本）
-- 幕材：${colorDesc}
-- 幕の形状：等間隔のスカラップ状たわみ（波打つ曲線）が端から端まで続く
-- サイズ：幅${width}m × 奥行き${length}m、設置台数${count}台
-- 高さ：地面から約2.5〜3m
-- 屋根形状：水平フラットな屋根面
+この写真の【人工芝の緑エリア（タイヤ遊具がある場所）】の上に
+シェード屋根を設置した施工後イメージを作成してください。
 
-【設置位置・条件】
-- 写真内の人工芝エリアまたは空きスペース全体を覆うように配置
-- 既存の背景（建物・空・電柱・フェンス・タイヤ・人工芝・舗装）は一切変更しない
-- カメラアングルと遠近感は元写真と完全一致させる
-- 柱の根元は地面にしっかり接地させる
-- 太陽光の方向・強さに合わせて自然な影を地面に落とす
+【最重要】
+人工芝エリアがシェードの屋根で完全に覆われて、
+人工芝の上にシェードの影が落ちている状態にしてください。
+人工芝エリアが日陰になるように屋根を設置してください。
 
-【画質・仕上がり条件】
-- 実際の建築写真のような高いリアリズム（フォトリアリスティック）
-- CG感・イラスト感を出さない
-- テキスト・ラベル・透かしは一切入れない
+【シェードの仕様】
+- フレーム色：アイボリー（薄いベージュ）の角型スチールポール
+- 幕材：ダークグリーンの半透明メッシュ生地
+- 幕の形状：スカラップ状のたわみが連続する波打ち形状
+- 柱4本：人工芝エリアの四隅に設置
+- 高さ：約2.5〜3m
+- 屋根面：人工芝エリア全体を覆う水平な屋根
+
+【維持すること】
+- 建物外壁・窓・看板・フェンス・タイヤ・ポール・階段は変更しない
+- カメラアングルと遠近感は元写真と完全に一致
+- フォトリアリスティックな仕上がり
+- テキスト・ラベル不要
 `.trim()
 
     const fluxResponse = await fetch('https://api.bfl.ai/v1/flux-2-pro', {
