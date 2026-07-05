@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
-import { getLatestLayoutImageUrl } from '@/actions/estimate-images'
+import { getLatestSiteImageUrl } from '@/actions/estimate-images'
 import { getEstimateWithItems } from '@/actions/estimates'
 import { getCompanySettings } from '@/actions/settings'
 import { getImageAsBase64 } from '@/lib/pdf-assets'
@@ -26,9 +26,9 @@ export default async function EstimatePdfPage({ params }: Props) {
 
   const { estimate, items } = data
 
-  const layoutImageRemoteUrl = await getLatestLayoutImageUrl(params.id)
-  const layoutImageUrl = layoutImageRemoteUrl
-    ? await getImageAsBase64(layoutImageRemoteUrl)
+  const siteImageRemoteUrl = await getLatestSiteImageUrl(params.id)
+  const siteImageUrl = siteImageRemoteUrl
+    ? await getImageAsBase64(siteImageRemoteUrl)
     : null
 
   return (
@@ -41,7 +41,7 @@ export default async function EstimatePdfPage({ params }: Props) {
         estimate={estimate}
         items={items}
         company={company}
-        layoutImageUrl={layoutImageUrl}
+        siteImageUrl={siteImageUrl}
       />
     </div>
   )

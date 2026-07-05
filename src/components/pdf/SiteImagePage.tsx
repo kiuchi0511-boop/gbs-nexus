@@ -76,16 +76,16 @@ const layoutStyles = StyleSheet.create({
 
 type Props = {
   estimate: Estimate
-  layoutImageUrl: string | null
+  siteImageUrl: string | null
 }
 
-export default function LayoutImagePage({ estimate, layoutImageUrl }: Props) {
+export default function SiteImagePage({ estimate, siteImageUrl }: Props) {
   const createdDate = format(new Date(estimate.estimate_date), 'yyyy年M月d日')
 
   return (
     <Page size="A4" style={layoutStyles.page}>
       <View style={layoutStyles.header}>
-        <Text style={layoutStyles.title}>配置イメージ図</Text>
+        <Text style={layoutStyles.title}>現場写真 施工後イメージ</Text>
         <Text style={layoutStyles.subtitle}>
           現場名：{estimate.job_name} ／ 作成日：{createdDate}
         </Text>
@@ -94,26 +94,24 @@ export default function LayoutImagePage({ estimate, layoutImageUrl }: Props) {
       <View style={layoutStyles.infoRow}>
         <Text style={layoutStyles.infoLabel}>顧客名：</Text>
         <Text style={layoutStyles.infoItem}>{estimate.client_name}</Text>
-        <Text style={layoutStyles.infoLabel}>　予定工期：</Text>
-        <Text style={layoutStyles.infoItem}>{estimate.duration ?? '-'}</Text>
         <Text style={layoutStyles.infoLabel}>　見積番号：</Text>
         <Text style={layoutStyles.infoItem}>{estimate.estimate_no}</Text>
       </View>
 
       <View style={layoutStyles.imageContainer}>
-        {layoutImageUrl ? (
-          <Image src={layoutImageUrl} style={layoutStyles.layoutImage} />
+        {siteImageUrl ? (
+          <Image src={siteImageUrl} style={layoutStyles.layoutImage} />
         ) : (
           <Text style={layoutStyles.noImageText}>
-            配置イメージ図が登録されていません。{'\n'}
-            見積編集画面の「配置イメージエディタ」から配置図を作成・保存してください。
+            現場写真合成イメージが登録されていません。{'\n'}
+            見積編集画面の「現場写真シェード合成」から画像を作成・保存してください。
           </Text>
         )}
       </View>
 
       <View style={layoutStyles.footer}>
         <Text>{estimate.client_name} 様</Text>
-        <Text>Ground BIG Shade 配置計画図</Text>
+        <Text>Ground BIG Shade 施工後イメージ</Text>
         <Text>p.3</Text>
       </View>
     </Page>

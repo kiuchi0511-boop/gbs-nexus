@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase'
 
 export default function LoginPage() {
@@ -8,6 +8,17 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (
+      !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+      !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    ) {
+      setError(
+        'Supabase環境変数が読み込まれていません。.env.local を確認し、npm run dev を再起動してください。'
+      )
+    }
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -21,21 +32,25 @@ export default function LoginPage() {
         password,
       })
 
+      console.log('login result:', { data, error: authError })
+
       if (authError) {
+        console.error('login error detail:', authError)
         setError(authError.message)
         return
       }
 
       if (!data.session) {
-        setError('ログインに失敗しました')
+        console.error('login error detail: session is null', data)
+        setError('ログインに失敗しました（セッションが取得できません）')
         return
       }
 
       // Cookie をサーバーに確実に反映するためフルページ遷移する
       window.location.assign('/dashboard')
     } catch (err) {
-      setError('予期しないエラーが発生しました')
-      console.error('Login error:', err)
+      console.error('login error detail:', err)
+      setError(err instanceof Error ? err.message : '予期しないエラーが発生しました')
     } finally {
       setLoading(false)
     }

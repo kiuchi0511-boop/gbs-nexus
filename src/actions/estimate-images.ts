@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase-server'
 import type { EstimateImage, SaveEstimateImageInput } from '@/types/database'
 
-export async function getLatestLayoutImageUrl(
+export async function getLatestSiteImageUrl(
   estimateId: string
 ): Promise<string | null> {
   const supabase = await createClient()
@@ -13,12 +13,12 @@ export async function getLatestLayoutImageUrl(
     .from('estimate_images')
     .select('image_url')
     .eq('estimate_id', estimateId)
-    .eq('generation_type', 'layout')
+    .eq('generation_type', 'site_composite')
     .order('created_at', { ascending: false })
     .limit(1)
 
   if (error) {
-    console.error('[getLatestLayoutImageUrl] error:', error)
+    console.error('[getLatestSiteImageUrl] error:', error)
     return null
   }
 

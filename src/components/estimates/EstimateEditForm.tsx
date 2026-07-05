@@ -260,6 +260,7 @@ export default function EstimateEditForm({
       <EstimateForm form={form} />
       <EstimateImagesSection
         estimateId={estimate.id}
+        jobName={form.watch('job_name') || estimate.job_name}
         initialImages={initialImages}
       />
       <EstimateItemsTable items={items} onChange={setItems} />

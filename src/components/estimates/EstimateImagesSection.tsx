@@ -25,13 +25,17 @@ const ShadeCanvasEditor = dynamic(() => import('@/components/ShadeCanvasEditor')
   ),
 })
 
+import SiteImageGenerator from '@/components/SiteImageGenerator'
+
 type Props = {
   estimateId: string
+  jobName: string
   initialImages: EstimateImage[]
 }
 
 export default function EstimateImagesSection({
   estimateId,
+  jobName,
   initialImages,
 }: Props) {
   const router = useRouter()
@@ -74,7 +78,16 @@ export default function EstimateImagesSection({
     }
   }
 
-  const handleLayoutSave = async (dataUrl: string) => {
+  const saveEstimateImage = async (
+    imageUrl: string,
+    generationType: 'layout' | 'site',
+    meta?: {
+      width_m?: number
+      length_m?: number
+      count?: number
+      pillar_type?: number
+    }
+  ) => {
     const supabase = createClient()
 
     const {
@@ -86,7 +99,7 @@ export default function EstimateImagesSection({
       return
     }
 
-    const res = await fetch(dataUrl)
+    const res = await fetch(imageUrl)
     const blob = await res.blob()
 
     const fileName = `${estimateId}/${Date.now()}.png`
@@ -108,7 +121,11 @@ export default function EstimateImagesSection({
         estimate_id: estimateId,
         image_url: urlData.publicUrl,
         prompt: null,
-        generation_type: 'layout',
+        generation_type: generationType,
+        width_m: meta?.width_m ?? null,
+        length_m: meta?.length_m ?? null,
+        count: meta?.count ?? null,
+        pillar_type: meta?.pillar_type ?? null,
       })
       .select()
       .single()
@@ -122,7 +139,7 @@ export default function EstimateImagesSection({
       estimate_id: data.estimate_id,
       image_url: data.image_url,
       prompt: data.prompt,
-      generation_type: data.generation_type ?? 'layout',
+      generation_type: data.generation_type ?? generationType,
       width_m: data.width_m != null ? Number(data.width_m) : null,
       length_m: data.length_m != null ? Number(data.length_m) : null,
       count: data.count,
@@ -132,7 +149,53 @@ export default function EstimateImagesSection({
     }
 
     setImages((prev) => [savedImage, ...prev])
-    toast.success('配置イメージを保存しました')
+    toast.success(
+      generationType === 'site'
+        ? '現場合成イメージを保存しました'
+        : '配置イメージを保存しました'
+    )
+    router.refresh()
+  }
+
+  const handleLayoutSave = async (dataUrl: string) => {
+    await saveEstimateImage(dataUrl, 'layout')
+  }
+
+  const handleSiteImageSave = async (
+    _publicUrl: string,
+    image?: {
+      id: string
+      estimate_id: string
+      image_url: string
+      prompt: string | null
+      generation_type: string | null
+      width_m: number | null
+      length_m: number | null
+      count: number | null
+      pillar_type: number | null
+      color: string | null
+      created_at: string
+    }
+  ) => {
+    if (image) {
+      setImages((prev) => [
+        {
+          id: image.id,
+          estimate_id: image.estimate_id,
+          image_url: image.image_url,
+          prompt: image.prompt,
+          generation_type: image.generation_type ?? 'site_composite',
+          width_m: image.width_m != null ? Number(image.width_m) : null,
+          length_m: image.length_m != null ? Number(image.length_m) : null,
+          count: image.count,
+          pillar_type: image.pillar_type,
+          color: image.color,
+          created_at: image.created_at,
+        },
+        ...prev,
+      ])
+    }
+    toast.success('現場合成イメージを保存しました')
     router.refresh()
   }
 
@@ -144,6 +207,22 @@ export default function EstimateImagesSection({
         </CardHeader>
         <CardContent>
           <ShadeCanvasEditor estimateId={estimateId} onSave={handleLayoutSave} />
+        </CardContent>
+      </Card>
+
+      <Card className="mt-6">
+        <CardHeader>
+          <CardTitle>🏗️ 現場写真シェード合成（AI生成）</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="mb-4 text-sm text-muted-foreground">
+            現場写真をアップロードすると、GBSシェードを合成したイメージ図をAIで生成します
+          </p>
+          <SiteImageGenerator
+            estimateId={estimateId}
+            jobName={jobName}
+            onSave={handleSiteImageSave}
+          />
         </CardContent>
       </Card>
 

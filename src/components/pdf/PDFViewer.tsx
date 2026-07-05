@@ -10,7 +10,7 @@ type Props = {
   estimate: Estimate
   items: EstimateItem[]
   company: CompanySettings
-  layoutImageUrl?: string | null
+  siteImageUrl?: string | null
 }
 
 let fontRegistered = false
@@ -28,7 +28,7 @@ export default function PDFViewer({
   estimate,
   items,
   company,
-  layoutImageUrl = null,
+  siteImageUrl = null,
 }: Props) {
   const [ready, setReady] = useState(false)
 
@@ -47,7 +47,7 @@ export default function PDFViewer({
       estimate={estimate}
       items={items}
       company={company}
-      layoutImageUrl={layoutImageUrl}
+      siteImageUrl={siteImageUrl}
     />
   )
 
